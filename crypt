@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require 'gibberish'
+require 'highline/import'
+
+p = ask('key: ') { |q| q.echo = false }
+p2 = ask('again: ') { |q| q.echo = false }
+abort('nope') if p != p2
+f = Dir.pwd + '/' + ARGV[1].chomp
+o = ARGV[0].chomp
+cipher = Gibberish::AES.new(p)
+if o == '-e'
+  cipher.encrypt_file(f, f + '.enc')
+  File.delete(f)
+  abort('done')
+elsif o == '-d'
+  begin
+    cipher.decrypt_file(f, f.sub('.enc', ''))
+    File.delete(f)
+  rescue OpenSSL::Cipher::CipherError => e
+    abort('incorrect')
+    File.delete(f.sub('.enc', ''))
+  end
+end
+  
+
+
