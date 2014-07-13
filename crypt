@@ -7,7 +7,7 @@ require 'highline/import'
 # crypt -e SOMEFILE
 # enter pw
 # crypt -d SOMEFILE.enc
-# eter pw
+# enter pw
 
 p = ask('key: ') { |q| q.echo = false }
 p2 = ask('again: ') { |q| q.echo = false }
