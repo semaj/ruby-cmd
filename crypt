@@ -25,7 +25,6 @@ elsif o == '-d'
     File.delete(f)
   rescue OpenSSL::Cipher::CipherError => e
     abort('incorrect')
-    File.delete(f.sub('.enc', ''))
   end
 end
   
