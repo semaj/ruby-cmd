@@ -1,6 +1,13 @@
 #!/usr/bin/env ruby
 require 'gibberish'
 require 'highline/import'
+# USAGE
+# install required gems
+# ln -s $PWD/crypt /usr/local/bin/crypt
+# crypt -e SOMEFILE
+# enter pw
+# crypt -d SOMEFILE.enc
+# eter pw
 
 p = ask('key: ') { |q| q.echo = false }
 p2 = ask('again: ') { |q| q.echo = false }
