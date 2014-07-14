@@ -9,10 +9,12 @@ when '-ms'
   d = DateTime.strptime(d, '%Q')
 when '-s'
   d = DateTime.strptime(d, '%s')
-when '-di'
+when '-d'
   d = DateTime.strptime(d, '%Y%m%d')
+when '-dt'
+  d = DateTime.strptime(d, '%Y%m%d:%H%M')
 end
-puts "#{d.strftime('%Y-%m-%d : %H:%M:%S : %z')}"
+puts "#{d.strftime('%Y-%m-%d | %H:%M:%S | %z')}"
 puts "ms: #{d.strftime('%Q')}"
 puts "s: #{d.strftime('%s')}"
 
