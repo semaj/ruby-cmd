@@ -11,7 +11,6 @@ rows = []
 rows << ['IP', 'City', 'Region', 'Country', 'Contintent', 'ISP']
 rows << :separator
 trace.each_line do |l|
-  #puts l.match(ip).to_s
   j = JSON.parse(open("http://www.telize.com/geoip/#{l.match(ip).to_s}").read)
   rows << [j['ip'], j['city'], j['region'], j['country'], j['continent_code'], j['isp']]
 end
