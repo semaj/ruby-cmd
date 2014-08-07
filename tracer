@@ -8,7 +8,7 @@ ip = /\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][
 
 trace = `traceroute -n #{ARGV[0].chomp}`
 rows = []
-rows << ['IP', 'City', 'Region', 'Country', 'Contintent', 'ISP']
+rows << ['IP', 'City', 'Region', 'Country', 'Continent', 'ISP']
 rows << :separator
 trace.each_line do |l|
   j = JSON.parse(open("http://www.telize.com/geoip/#{l.match(ip).to_s}").read)
