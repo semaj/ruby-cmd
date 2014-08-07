@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require 'date'
+require 'colorize'
+
+grep = ARGV[0]
+pattern = Regexp.new(grep.chomp) unless grep.nil? || grep.size == 0
+f = File.open('/Users/james/.zsh_history')
+rows = []
+f.each_with_index do |l, i|
+  n = (i+1).to_s.rjust(6, ' ')
+  split = l.force_encoding("iso-8859-1").split(/[:;]/)
+  cmd = split[3].strip
+  if !pattern.nil?
+    match = cmd.match(pattern)
+    next if match.nil?
+    cmd = cmd.split(match.to_s).join(match.to_s.colorize(:yellow))
+  end
+  time = DateTime.strptime(split[1].strip, '%s').to_time.localtime.strftime('%b %d, %Y - %I:%M:%S %p')
+  puts "#{n} | #{time} | #{cmd}"
+end
