@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'open-uri'
+require 'terminal-table'
+  
+ip = /\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/
+
+trace = `traceroute -n #{ARGV[0].chomp}`
+rows = []
+rows << ['IP', 'City', 'Region', 'Country', 'Contintent', 'ISP']
+rows << :separator
+trace.each_line do |l|
+  #puts l.match(ip).to_s
+  j = JSON.parse(open("http://www.telize.com/geoip/#{l.match(ip).to_s}").read)
+  rows << [j['ip'], j['city'], j['region'], j['country'], j['continent_code'], j['isp']]
+end
+
+puts Terminal::Table.new rows: rows
