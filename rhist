@@ -9,7 +9,7 @@ rows = []
 f.each_with_index do |l, i|
   n = (i+1).to_s.rjust(6, ' ')
   split = l.force_encoding("iso-8859-1").split(/[:;]/)
-  cmd = split[3].strip
+  cmd = split[3].strip rescue ''
   if !pattern.nil?
     match = cmd.match(pattern)
     next if match.nil?
