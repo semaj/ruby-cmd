@@ -13,7 +13,7 @@ f.each_with_index do |l, i|
   if !pattern.nil?
     match = cmd.match(pattern)
     next if match.nil?
-    cmd = cmd.split(match.to_s).join(match.to_s.colorize(:yellow))
+    cmd = (cmd + " ").split(match.to_s).join(match.to_s.colorize(:yellow))
   end
   time = DateTime.strptime(split[1].strip, '%s').to_time.localtime.strftime('%b %d, %Y - %I:%M:%S %p')
   puts "#{n} | #{time} | #{cmd}"
